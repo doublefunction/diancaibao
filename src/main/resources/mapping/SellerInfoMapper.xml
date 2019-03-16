@@ -8,10 +8,31 @@
     <result column="openid" property="openid" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="tel" property="tel" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="IP" property="IP" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    seller_id, username, password, openid, create_time, update_time
+  <sql id="whereStatement">
+    <where>
+      1 = 1
+
+        <if test="condition.username !=null and condition.username !=''">
+          and username = #{condition.username}
+        </if>
+
+    </where>
   </sql>
+  <sql id="Base_Column_List" >
+    seller_id, username, password, openid, create_time, update_time,tel,email,score,IP
+  </sql>
+  <select id="findSellerInfoPageList" resultMap="BaseResultMap" parameterType="com.tjufe.manage.utils.Page">
+    select
+    <include refid="Base_Column_List" />
+    from seller_info
+    <include refid="whereStatement"/>
+  </select>
+
   <select id="findAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -109,4 +130,5 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where seller_id = #{sellerId,jdbcType=VARCHAR}
   </update>
+
 </mapper>

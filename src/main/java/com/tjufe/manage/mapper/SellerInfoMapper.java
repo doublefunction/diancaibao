@@ -1,6 +1,7 @@
 package com.tjufe.manage.mapper;
 
 import com.tjufe.manage.dataObject.SellerInfo;
+import com.tjufe.manage.utils.Page;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface SellerInfoMapper {
     int updateByPrimaryKeySelective(SellerInfo record);
 
     int updateByPrimaryKey(SellerInfo record);
+
+    List<SellerInfo> findSellerInfoPageList(Page page);
 }

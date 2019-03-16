@@ -1,4 +1,7 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.springframework.web.servlet.ModelAndView" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,15 +30,13 @@
     <!--操作栏-->
     <div class="operates clearfix" style="overflow: auto;white-space: nowrap; font-size: 0;">
         <div class="pull-left left-inp defualt">
-            <input type="text" class="pull-left" style="margin-left: 10px;" placeholder="用户名、手机号">
-            <button class="btn delete pramary">搜索</button>
-            <button class="btn delete pramary">筛选</button>
+            <input type="text" class="pull-left" style="margin-left: 10px;" placeholder="用户名">
+            <button class="btn delete pramary" id="btn_search">搜索</button>
         </div>
         <div class="right-btns" style="font-size: 0">
-            <button class="btn delete pramary">增加</button>
-            <button class="btn delete pramary">编辑</button>
-            <button class="btn delete pramary">设密</button>
-            <button class="btn delete pramary">删除</button>
+            <button class="btn delete pramary" id="btn_addbtn_add">增加</button>
+            <button class="btn delete pramary" id="btn_update">编辑</button>
+            <button class="btn delete pramary" id="btn_delete">删除</button>
         </div>
     </div>
     <!--表格-->
@@ -53,11 +54,15 @@
                         <img class="bottom" src="../img/jt-bottom.png" alt="">
                         <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
                     </th>
-                    <th class="sort cur" style="width: 15%;">注册时间
+                    <th class="sort cur" style="width:15%">邮箱
                         <img class="bottom" src="../img/jt-bottom.png" alt="">
                         <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
                     </th>
-                    <th class="sort cur" style="width: 10%;">登录次数
+                    <th class="sort cur" style="width: 15%;">创建时间
+                        <img class="bottom" src="../img/jt-bottom.png" alt="">
+                        <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
+                    </th>
+                    <th class="sort cur" style="width: 10%;">修改时间
                         <img class="bottom" src="../img/jt-bottom.png" alt="">
                         <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
                     </th>
@@ -65,10 +70,10 @@
                         <img class="bottom" src="../img/jt-bottom.png" alt="">
                         <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
                     </th>
-                    <th class="no-nowrap sort cur" style="width: 15%;">最近登录
-                        <img class="bottom" src="../img/jt-bottom.png" alt="">
-                        <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
-                    </th>
+                    <%--<th class="no-nowrap sort cur" style="width: 15%;">最近登录--%>
+                        <%--<img class="bottom" src="../img/jt-bottom.png" alt="">--%>
+                        <%--<img class="top" style="display: none" src="../img/jt-right-co.png" alt="">--%>
+                    <%--</th>--%>
                     <th class="no-nowrap sort cur" style="width: 15%;">IP地址
                         <img class="bottom" src="../img/jt-bottom.png" alt="">
                         <img class="top" style="display: none" src="../img/jt-right-co.png" alt="">
@@ -76,6 +81,37 @@
                 </tr>
             </thead>
             <tbody>
+
+                <c:forEach items="${page.result}" varStatus="i" var="wl">
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="pkId" id="ph1"> <label for="ph1">12345</label></td>
+                        <td>
+                            <p>${wl.username}</p>
+                        </td>
+                        <td>
+                            <p>${wl.tel}</p>
+                        </td>
+                        <td>
+                            <p>${wl.email}</p>
+                        </td>
+                        <% SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-DD HH-mm-ss");
+                        %>
+                        <td>
+                            <p>${wl.createTime}</p>
+                        </td>
+                        <td>
+                            <p>${wl.updateTime}</p>
+                        </td>
+                        <td>
+                            <p>${wl.score}</p>
+                        </td>
+                        <td>
+                            <p>${wl.IP}</p>
+                        </td>
+                    </tr>
+                </c:forEach>
+
                 <tr>
                     <td>
                         <input type="checkbox" name="pkId" id="ph1"> <label for="ph1">12345</label></td>
@@ -101,131 +137,8 @@
                         <p>118.211.105.118</p>
                     </td>
                 </tr>
-                <tr class="info">
-                     <td>
-                        <input type="checkbox" name="pkId" id="ph2"> <label for="ph2">12</label></td>
-                    <td>
-                        <p>zhangsanfeng</p>
-                    </td>
-                    <td>
-                        <p>139****2588</p>
-                    </td>
-                    <td>
-                        <p>2018-05-28 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>100</p>
-                    </td>
-                    <td>
-                        <p>5000</p>
-                    </td>
-                    <td>
-                        <p>2018-06-09 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>118.211.105.118</p>
-                    </td>
-                </tr>
-                <tr>
-                     <td >
-                        <input type="checkbox" name="pkId" id="ph3"> <label for="ph3">123</label></td>
-                    <td>
-                        <p>zhangsanfeng</p>
-                    </td>
-                    <td>
-                        <p>139****2588</p>
-                    </td>
-                    <td>
-                        <p>2018-05-28 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>100</p>
-                    </td>
-                    <td>
-                        <p>5000</p>
-                    </td>
-                    <td>
-                        <p>2018-06-09 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>118.211.105.118</p>
-                    </td>
-                </tr>
-                <tr class="info">
-                     <td >
-                        <input type="checkbox" name="pkId" id="ph4"> <label for="ph4">4111</label></td>
-                    <td>
-                        <p>zhangsanfeng</p>
-                    </td>
-                    <td>
-                        <p>139****2588</p>
-                    </td>
-                    <td>
-                        <p>2018-05-28 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>100</p>
-                    </td>
-                    <td>
-                        <p>5000</p>
-                    </td>
-                    <td>
-                        <p>2018-06-09 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>118.211.105.118</p>
-                    </td>
-                </tr>
-                <tr>
-                     <td >
-                        <input type="checkbox" name="pkId" id="ph5"> <label for="ph5">5</label></td>
-                    <td>
-                        <p>zhangsanfeng</p>
-                    </td>
-                    <td>
-                        <p>139****2588</p>
-                    </td>
-                    <td>
-                        <p>2018-05-28 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>100</p>
-                    </td>
-                    <td>
-                        <p>5000</p>
-                    </td>
-                    <td>
-                        <p>2018-06-09 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>118.211.105.118</p>
-                    </td>
-                </tr>
-                <tr class="info">
-                     <td >
-                        <input type="checkbox" name="pkId" id="ph6"> <label for="ph6">6</label></td>
-                    <td>
-                        <p>zhangsanfeng</p>
-                    </td>
-                    <td>
-                        <p>139****2588</p>
-                    </td>
-                    <td>
-                        <p>2018-05-28 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>100</p>
-                    </td>
-                    <td>
-                        <p>5000</p>
-                    </td>
-                    <td>
-                        <p>2018-06-09 <i class="hui">10:30</i></p>
-                    </td>
-                    <td>
-                        <p>118.211.105.118</p>
-                    </td>
-                </tr>
+
+
             </tbody>
         </table>
     </div>
@@ -259,6 +172,20 @@
         </div>
     </div>
 </body>
+<script>
+    $("#btn_add").click(function(){
+
+    });
+    $("#btn_update").click(function(){
+
+    });
+    $("#btn_delete").click(function(){
+
+    });
+    $("#btn_search").click(function(){
+
+    });
+</script>
 <script src="../plugin/jquery/jquery.js"></script>
 <script src="../js/frame-base.js"></script>
 
